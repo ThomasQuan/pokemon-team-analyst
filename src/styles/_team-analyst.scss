@@ -1,0 +1,88 @@
+.team-analyst-container {
+  display: flex;
+}
+
+.selected-pokemon-detail {
+  width: 30vw;
+  height: 100vh;
+  > .pokemon-detail {
+    display: flex;
+    border: 10px solid transparent;
+
+    border-image: url("../assets/images/dialog_box.png") 30 round;
+    margin : 0.5rem 0 0.5rem 0.5rem;
+    height: 13vh;
+    > img {
+      border-width: 4px;
+      width: 6vw;
+      margin: 1rem 0 0 0.5rem;
+      height: 80%;
+      animation-name: bounce;
+      animation-duration: 0.75s;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+.pokemon-title {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  > h3 {
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 1rem;
+  }
+  > ul {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    text-align: right;
+    >li{
+        font-size: 1rem;
+        margin-left: 0.1rem;
+        border-radius: 5px;
+        border: solid transparent;
+        width: 5vw;
+        text-align: center;
+        color: white;
+    }
+  }
+}
+.pokemon-move-list {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  flex: 1;
+  font-family: "Press Start 2P", cursive;
+  > div {
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0.5rem;
+    width: 40%;
+    height: 2vh;
+    font-size: 1rem;
+    border: 2px transparent;
+    > img {
+      visibility: hidden;
+      width: 13px;
+      height: 13px;
+      margin-right: 1rem;
+    }
+  }
+  > div:hover {
+    > img {
+      visibility: visible;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 body {
-  font-family: "Roboto", sans-serif;
+  // font-family: "Roboto", sans-serif;
+  font-family: 'Orbitron', sans-serif;
 }
 ::-webkit-input-placeholder {
   text-align: center;
@@ -21,3 +22,11 @@ body {
   margin-left: 4vw;
 }
 
+@keyframes bounce {
+  from { 
+    transform: translateY(0px) scale(1);
+  }
+  to   { 
+    transform: translateY(-5px) scale(1, 1);
+  }
+}

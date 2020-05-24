@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Modal from "react-modal";
 import PikachuDenial from "../assets/gif/pikachu-denial.gif";
 const Alert = (props) => {
@@ -22,7 +22,6 @@ const Alert = (props) => {
     },
   };
   Modal.setAppElement("#root");
-  const [modalState, setModal] = React.useState(false);
 
   //this need to be in the parent compoentn
   // const openModal = () => {
@@ -33,7 +32,6 @@ const Alert = (props) => {
 
   return (
     <React.Fragment>
-      {console.log(modalState)}
       <Modal
         isOpen={props.isOpen}
         onRequestClose={closeModal}

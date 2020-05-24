@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import Modal from 'react-modal';
-import Alert from './alert_modal';
+import Alert from "./alert-modal";
 import { Link } from "react-router-dom";
+import MasterBall from "../assets/images/master_ball.png";
 
 class PokemonList extends Component {
   state = {
@@ -12,6 +12,26 @@ class PokemonList extends Component {
     pokemons: [],
     next: "",
     openAlert: false,
+    template_pokemon: [
+      <div className="selected-pokemon" key={1}>
+        <img className="pokemon-img" src={MasterBall} alt="pokemon"></img>
+      </div>,
+      <div className="selected-pokemon" key={2}>
+        <img className="pokemon-img" src={MasterBall} alt="pokemon"></img>
+      </div>,
+      <div className="selected-pokemon" key={3}>
+        <img className="pokemon-img" src={MasterBall} alt="pokemon"></img>
+      </div>,
+      <div className="selected-pokemon" key={4}>
+        <img className="pokemon-img" src={MasterBall} alt="pokemon"></img>
+      </div>,
+      <div className="selected-pokemon" key={5}>
+        <img className="pokemon-img" src={MasterBall} alt="pokemon"></img>
+      </div>,
+      <div className="selected-pokemon" key={6}>
+        <img className="pokemon-img" src={MasterBall} alt="pokemon"></img>
+      </div>,
+    ],
   };
   componentDidMount() {
     axios
@@ -30,7 +50,7 @@ class PokemonList extends Component {
   }
 
   handleClose = () => {
-    this.setState({openAlert : false});
+    this.setState({ openAlert: false });
   };
 
   selectPokemon = (pokemon, index, id) => {
@@ -43,17 +63,43 @@ class PokemonList extends Component {
           { name: pokemon.name, url: pokemon.url, id: id.replace(/\//g, "") },
         ],
         pokemons: tempArr,
+        template_pokemon: [
+          <div className="selected-pokemon" key={pokemon.name}>
+            <img
+              className="pokemon-img"
+              src={`https://pokeres.bastionbot.org/images/pokemon/${id.replace(
+                /\//g,
+                ""
+              )}.png`}
+              alt="pokemon"
+            ></img>
+            <h3>{pokemon.name}</h3>
+          </div>,
+          ...this.state.template_pokemon.slice(0, 5),
+        ],
       });
     } else {
-        this.setState({openAlert : true})
+      this.setState({ openAlert: true });
     }
   };
 
   inspect_team = () => {
     const team = this.state.selected_team;
-    console.log(team);
   };
 
+  // display_selected_pokemon = () => {
+  //   const display = this.state.selected_team.map((key) => (
+  //     <div className="selected-pokemon" key={key.name}>
+  //       <img
+  //         className="pokemon-img"
+  //         src={`https://pokeres.bastionbot.org/images/pokemon/${key.id}.png`}
+  //         alt="pokemon"
+  //       ></img>
+  //       <h3>{key.name}</h3>
+  //     </div>
+  //   ));
+  //   return display;
+  // };
   loadNextBatch = () => {
     axios.get(`${this.state.next}`).then((res) => {
       const content = res.data.results;
@@ -71,29 +117,25 @@ class PokemonList extends Component {
     return (
       <React.Fragment>
         <h2 className="title">Selected Team</h2>
-        <Alert isOpen={this.state.openAlert} handleClose={this.handleClose}></Alert>
+        <Alert
+          isOpen={this.state.openAlert}
+          handleClose={this.handleClose}
+        ></Alert>
         <div className="container">
-          <div className="selected-pokemon">
-            {this.state.selected_team.map((key) => (
-              <div key={key.name}>
-                <img
-                  className="pokemon-img"
-                  src={`https://pokeres.bastionbot.org/images/pokemon/${key.id}.png`}
-                  alt="pokemon"
-                ></img>
-                <h3>{key.name}</h3>
-              </div>
-            ))}
+          <div className="selected-pokemon-list">
+            {this.state.template_pokemon}
           </div>
-          <Link
-            id="btn-inspect"
-            to={{
-              pathname: "/team",
-              pokemons: { selected: this.state.selected_team },
-            }}
-          >
-            <Button>Inspect</Button>
-          </Link>
+          {this.state.selected_team.length !== 0 && (
+            <Link
+              id="btn-inspect"
+              to={{
+                pathname: "/team",
+                pokemons: { selected: this.state.selected_team },
+              }}
+            >
+              <Button>Inspect</Button>
+            </Link>
+          )}
         </div>
         <div className="search-box">
           <h2 className="title">Search pokemon</h2>
