@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Next from "../assets/images/next.png";
-import TypeDetector from "./types_detector";
+import TypeDetector from "./types-detector";
 import axios from "axios";
+import PokemonStat from "./pokemon-stat";
+import TeamResult from "./team-result";
 const TeamAnalysis = (props) => {
   const [selectedPokemon] = useState(
     props.location.pokemons.selected
@@ -45,6 +47,7 @@ const TeamAnalysis = (props) => {
   return (
     <React.Fragment>
       <div className="team-analyst-container">
+        
         <div className="selected-pokemon-detail">
           {console.log(pokemonData)}
           {pokemonData.map((key) => (
@@ -87,6 +90,8 @@ const TeamAnalysis = (props) => {
             </div>
           ))}
         </div>
+        <PokemonStat></PokemonStat>
+        <TeamResult></TeamResult>
       </div>
     </React.Fragment>
   );
