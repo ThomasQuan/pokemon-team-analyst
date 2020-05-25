@@ -4,28 +4,11 @@ import TypeDetector from "./types-detector";
 import axios from "axios";
 import PokemonStat from "./pokemon-stat";
 import TeamResult from "./team-result";
+import MoveList from "./move-list-modal";
 const TeamAnalysis = (props) => {
-  const [selectedPokemon] = useState(
-    props.location.pokemons.selected
-  );
-  // props.location.pokemons.selected
-  const [pokemonData, setPokemonData] = useState([
-    // { name: "venusaur", url: "https://pokeapi.co/api/v2/pokemon/3/", id: "3" },
-    // {
-    //   name: "charmander",
-    //   url: "https://pokeapi.co/api/v2/pokemon/4/",
-    //   id: "4",
-    // },
-    // {
-    //   name: "charmeleon",
-    //   url: "https://pokeapi.co/api/v2/pokemon/5/",
-    //   id: "5",
-    // },
-    // { name: "charizard", url: "https://pokeapi.co/api/v2/pokemon/6/", id: "6" },
-    // { name: "squirtle", url: "https://pokeapi.co/api/v2/pokemon/7/", id: "7" },
-    // { name: "wartortle", url: "https://pokeapi.co/api/v2/pokemon/8/", id: "8" },
-  ]);
-
+  const [selectedPokemon] = useState(props.location.pokemons.selected);
+  const [pokemonData, setPokemonData] = useState([]);
+  const [modal, setModal] = useState({ condition: false, move_list: [] });
   useEffect(() => {
     for (var i = 0; i < selectedPokemon.length; i++) {
       axios
@@ -37,19 +20,41 @@ const TeamAnalysis = (props) => {
               name: res.data.name,
               types: res.data.types,
               moves: res.data.moves.map((key) => key.move),
+              selected_move: [],
               base_stat: res.data.stats,
             })
           );
         });
     }
-  }, []);
+  }, [selectedPokemon, pokemonData.selected_move]);
+
+  const handleOpen = (pokemon) => {
+    console.log(pokemon.name);
+    setModal({
+      condition: true,
+      move_list: pokemon.moves,
+      pokemon_name: pokemon.name,
+    });
+  };
+
+  const handleClose = () => {
+    setModal({ condition: false, move_list: [], pokemon_name: "" });
+  };
+  const picked_move = (move, pokemon_name) => {
+    const tempArr = pokemonData.map((key) => {
+      if (key.name === pokemon_name) {
+        key.selected_move.push(move);
+      }
+      return key;
+    });
+    setPokemonData(tempArr);
+    console.log(pokemonData);
+  };
 
   return (
     <React.Fragment>
       <div className="team-analyst-container">
-        
         <div className="selected-pokemon-detail">
-          {console.log(pokemonData)}
           {pokemonData.map((key) => (
             <div key={key.id} className="pokemon-detail">
               <img
@@ -69,24 +74,23 @@ const TeamAnalysis = (props) => {
                   ))}
                 </div>
                 <div className="pokemon-move-list">
-                  <div>
-                    <img src={Next} alt="flaticon"></img>Move1
-                  </div>
-                  <div>
-                    <img src={Next} alt="flaticon"></img>Move2
-                  </div>
-                  <div>
-                    <img src={Next} alt="flaticon"></img>Move3
-                  </div>
-                  <div>
-                    <img src={Next} alt="flaticon"></img>Move4
+                  <div
+                    onClick={() => {
+                      handleOpen(key);
+                    }}
+                  >
+                    <img src={Next} alt="flaticon"></img>
+                    SELECT MOVE
                   </div>
                 </div>
+                <MoveList
+                  isOpen={modal.condition}
+                  moveList={modal.move_list}
+                  pokemon_name={modal.pokemon_name}
+                  handleClose={handleClose}
+                  picked_move={picked_move}
+                ></MoveList>
               </div>
-
-              {/* {
-                key.base_stat.map(el=>(<div><ul><li>STAT NAME : {el.stat.name}  ==> {el.base_stat}</li></ul></div>))
-              } */}
             </div>
           ))}
         </div>
