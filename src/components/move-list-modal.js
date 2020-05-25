@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import axios from "axios";
 import DialogBorder from "../assets/images/dialog_box.png";
 const MoveList = (props) => {
   const customStyles = {
@@ -19,16 +20,36 @@ const MoveList = (props) => {
   };
   Modal.setAppElement("#root");
 
-  const [moveList, setMoveList] = useState(props.moveList);
-  useEffect(() => {}, []);
+  const [moveList, setMoveList] = useState([]);
+  const [nextBatch , setNextBatch] = useState(20);
+
+  useEffect(()=>{
+    setMoveList(props.moveList)
+    if(props.move_id.length !== 0)
+    {
+      for(var i = 0 ; i < 20 ; i++)
+      {
+        axios.get(`https://pokeapi.co/api/v2/move/${props.move_id[i]}`).then(
+          res=>{
+            console.log(res.data)
+          }
+        )
+      }
+    }
+  },[props.move_id,props.moveList])
+
+
   const closeModal = () => {
     props.handleClose();
   };
 
   const select_move = (move) => {
-    console.log(props.pokemon_name)
-    props.picked_move(move, props.pokemon_name);
+    closeModal();
   };
+
+  const load_more=()=>{
+    setNextBatch(nextBatch+20)
+  }
   return (
     <React.Fragment>
       <Modal
@@ -37,7 +58,8 @@ const MoveList = (props) => {
         style={customStyles}
       >
         <h2>MOVE LIST</h2>
-        {props.moveList.map((key, index) => (
+        <button onClick={load_more}> LOAD MORE</button>
+        {moveList.slice(0,nextBatch).map((key, index) => (
           <div key={index}>
             <ul>
               <li

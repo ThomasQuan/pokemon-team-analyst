@@ -5,10 +5,17 @@ import axios from "axios";
 import PokemonStat from "./pokemon-stat";
 import TeamResult from "./team-result";
 import MoveList from "./move-list-modal";
+
 const TeamAnalysis = (props) => {
   const [selectedPokemon] = useState(props.location.pokemons.selected);
   const [pokemonData, setPokemonData] = useState([]);
-  const [modal, setModal] = useState({ condition: false, move_list: [] });
+  const [modal, setModal] = useState({
+    condition: false,
+    move_list: [],
+    pokemon_name: "",
+    move_slot: [],
+    move_id: [],
+  });
   useEffect(() => {
     for (var i = 0; i < selectedPokemon.length; i++) {
       axios
@@ -22,33 +29,56 @@ const TeamAnalysis = (props) => {
               moves: res.data.moves.map((key) => key.move),
               selected_move: [],
               base_stat: res.data.stats,
+              move_id: res.data.moves.map((key) =>
+                key.move.url.substr(31).replace(/\//g, "")
+              ),
             })
           );
         });
     }
   }, [selectedPokemon, pokemonData.selected_move]);
 
-  const handleOpen = (pokemon) => {
-    console.log(pokemon.name);
-    setModal({
-      condition: true,
-      move_list: pokemon.moves,
-      pokemon_name: pokemon.name,
-    });
+  const handleOpen = (pokemon, index) => {
+    if (pokemon.selected_move[index] !== undefined) {
+      // const newArr = pokemon.selected_move.filter((key) => key.index !== index);
+      // console.log(newArr)
+      console.log("Future me, good luck creating a better deleting function");
+    } else {
+      setModal({
+        condition: true,
+        move_list: pokemon.moves,
+        pokemon_name: pokemon.name,
+        move_slot: index,
+        move_id: pokemon.move_id,
+      });
+    }
   };
 
   const handleClose = () => {
+    console.log(pokemonData);
+
     setModal({ condition: false, move_list: [], pokemon_name: "" });
   };
-  const picked_move = (move, pokemon_name) => {
+  const picked_move = (move, pokemon_name, index) => {
     const tempArr = pokemonData.map((key) => {
       if (key.name === pokemon_name) {
-        key.selected_move.push(move);
+        if (key.selected_move.length !== 4) {
+          key.selected_move.push({ index, move });
+        } else {
+          handleClose();
+        }
       }
       return key;
     });
     setPokemonData(tempArr);
-    console.log(pokemonData);
+  };
+
+  const display_move = (selected_move) => {
+    if (selected_move === undefined) {
+      return "SELECT MOVE";
+    } else {
+      return selected_move.move.name;
+    }
   };
 
   return (
@@ -76,17 +106,46 @@ const TeamAnalysis = (props) => {
                 <div className="pokemon-move-list">
                   <div
                     onClick={() => {
-                      handleOpen(key);
+                      handleOpen(key, 0);
                     }}
                   >
                     <img src={Next} alt="flaticon"></img>
-                    SELECT MOVE
+                    {display_move(key.selected_move[0])}
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      handleOpen(key, 1);
+                    }}
+                  >
+                    <img src={Next} alt="flaticon"></img>
+                    {display_move(key.selected_move[1])}
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      handleOpen(key, 2);
+                    }}
+                  >
+                    <img src={Next} alt="flaticon"></img>
+                    {display_move(key.selected_move[2])}
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      handleOpen(key, 3);
+                    }}
+                  >
+                    <img src={Next} alt="flaticon"></img>
+                    {display_move(key.selected_move[3])}
                   </div>
                 </div>
                 <MoveList
                   isOpen={modal.condition}
                   moveList={modal.move_list}
                   pokemon_name={modal.pokemon_name}
+                  move_slot={modal.move_slot}
+                  move_id={modal.move_id}
                   handleClose={handleClose}
                   picked_move={picked_move}
                 ></MoveList>
