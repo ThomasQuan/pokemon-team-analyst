@@ -22,11 +22,32 @@ body {
   margin-left: 4vw;
 }
 
+.modal-title{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+
 @keyframes bounce {
   from { 
     transform: translateY(0px) scale(1);
   }
   to   { 
     transform: translateY(-5px) scale(1, 1);
+  }
+}
+
+@keyframes blink {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
   }
 }

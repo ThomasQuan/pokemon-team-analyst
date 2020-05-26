@@ -16,6 +16,7 @@ const TeamAnalysis = (props) => {
     move_slot: [],
     move_id: [],
   });
+  const [picked_pokemon, setPickedPokemon] = useState("");
   useEffect(() => {
     for (var i = 0; i < selectedPokemon.length; i++) {
       axios
@@ -55,9 +56,12 @@ const TeamAnalysis = (props) => {
   };
 
   const handleClose = () => {
-    console.log(pokemonData);
-
-    setModal({ condition: false, move_list: [], pokemon_name: "" });
+    setModal({
+      condition: false,
+      move_list: [],
+      pokemon_name: "",
+      move_id: [],
+    });
   };
   const picked_move = (move, pokemon_name, index) => {
     const tempArr = pokemonData.map((key) => {
@@ -73,6 +77,10 @@ const TeamAnalysis = (props) => {
     setPokemonData(tempArr);
   };
 
+  const pick_pokemon=(name) => {
+    setPickedPokemon({ picked_pokemon: name });
+  };
+
   const display_move = (selected_move) => {
     if (selected_move === undefined) {
       return "SELECT MOVE";
@@ -86,7 +94,13 @@ const TeamAnalysis = (props) => {
       <div className="team-analyst-container">
         <div className="selected-pokemon-detail">
           {pokemonData.map((key) => (
-            <div key={key.id} className="pokemon-detail">
+            <div
+              key={key.id}
+              onClick={() => {
+                pick_pokemon(key.name);
+              }}
+              className="pokemon-detail"
+            >
               <img
                 src={`https://pokeres.bastionbot.org/images/pokemon/${key.id}.png`}
                 alt="pokemon"
@@ -153,7 +167,7 @@ const TeamAnalysis = (props) => {
             </div>
           ))}
         </div>
-        <PokemonStat></PokemonStat>
+        <PokemonStat pokemonData={pokemonData} picked_pokemon={picked_pokemon}></PokemonStat>
         <TeamResult></TeamResult>
       </div>
     </React.Fragment>

@@ -1,0 +1,23 @@
+.move-container {
+  > ul > li {
+    color: #3b3b37;
+    text-decoration: none;
+    list-style: none;
+    font-size: 1.5rem;
+    > img {
+      visibility: hidden;
+      width: 13px;
+      height: 13px;
+      margin-right: 1rem;
+    }
+  }
+  > ul > li:hover {
+    cursor: pointer;
+    color: #455954;
+    > img {
+      visibility: visible;
+      animation: blink 0.5s;
+      animation-iteration-count: infinite;
+    }
+  }
+}
