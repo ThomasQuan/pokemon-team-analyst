@@ -39,6 +39,8 @@ const TeamAnalysis = (props) => {
     }
   }, [selectedPokemon, pokemonData.selected_move]);
 
+
+
   const handleOpen = (pokemon, index) => {
     if (pokemon.selected_move[index] !== undefined) {
       // const newArr = pokemon.selected_move.filter((key) => key.index !== index);
@@ -77,8 +79,8 @@ const TeamAnalysis = (props) => {
     setPokemonData(tempArr);
   };
 
-  const pick_pokemon=(name) => {
-    setPickedPokemon({ picked_pokemon: name });
+  const pick_pokemon=(pokemon) => {
+    setPickedPokemon({ picked_pokemon: pokemon });
   };
 
   const display_move = (selected_move) => {
@@ -97,7 +99,7 @@ const TeamAnalysis = (props) => {
             <div
               key={key.id}
               onClick={() => {
-                pick_pokemon(key.name);
+                pick_pokemon(key);
               }}
               className="pokemon-detail"
             >
