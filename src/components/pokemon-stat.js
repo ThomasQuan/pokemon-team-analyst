@@ -7,8 +7,9 @@ const PokemonStat = (props) => {
   const [pickedPokemon, setPickedPokemon] = useState({
     base_stat: [],
     name: "",
-    damage_relation: [],
+    id: "",
   });
+
   const [barChart, setBarChart] = useState({
     type: "horizontalBar",
     labels: ["HP", "Attack", "Defense", "Sp.Atk", "Sp.Def", "Speed"],
@@ -41,25 +42,16 @@ const PokemonStat = (props) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (typeof props.picked_pokemon.picked_pokemon !== "undefined") {
-        let temp = [];
-        await props.picked_pokemon.picked_pokemon.types.map((key) => {
-          axios.get(key.type.url).then((res) => {
-            temp.push(res.data.damage_relations);
-          });
-        });
-        await setPokemonData({ pokemonData: props.pokemonData });
-        await setPickedPokemon({
-          base_stat: props.picked_pokemon.picked_pokemon.base_stat,
-          name: props.picked_pokemon.picked_pokemon.name,
-          id: props.picked_pokemon.picked_pokemon.id,
-          damage_relation: temp,
-        });
-      }
-    };
-    fetchData();
-  }, [props.picked_pokemon]);
+    if (typeof props.picked_pokemon.picked_pokemon !== "undefined") {
+      setPokemonData({ pokemonData: props.pokemonData });
+      setPickedPokemon({
+        base_stat: props.picked_pokemon.picked_pokemon.base_stat,
+        name: props.picked_pokemon.picked_pokemon.name,
+        id: props.picked_pokemon.picked_pokemon.id,
+        dmg_relation: props.picked_pokemon.picked_pokemon.dmg_relation,
+      });
+    }
+  }, [props.picked_pokemon, props.pokemonData]);
 
   return (
     <React.Fragment>
@@ -67,35 +59,56 @@ const PokemonStat = (props) => {
         <div className="pokemon-stat-container"></div>
       ) : (
         <div className="pokemon-stat-container">
-          <p className="modal-title">
-            {pickedPokemon.name}
-            {console.log(pickedPokemon)}
-          </p>
+          <p className="modal-title">{pickedPokemon.name}</p>
           <div className="chart-container">
             <HorizontalBar data={barChart} options={BarOption} />
             <div className="type-container">
               <div className="effect-container">
-                <h2>Supper effective agaisnt</h2>
+                <h2>Double Damage From</h2>
                 <ul className="effective-list-container">
-                  <li>Fire</li>
+                  {typeof pickedPokemon.dmg_relation !== "undefined" ? (
+                    pickedPokemon.dmg_relation[0].double_damage_from.map(
+                      (key) => <li key={key}>{key}</li>
+                    )
+                  ) : (
+                    <li>SELECT YOUR POKEMON</li>
+                  )}
                 </ul>
               </div>
               <div className="effect-container">
                 <h2>Double Damage To</h2>
                 <ul className="effective-list-container">
-                  <li>FIRE</li>
+                  {typeof pickedPokemon.dmg_relation !== "undefined" ? (
+                    pickedPokemon.dmg_relation[0].double_damage_to.map(
+                      (key) => <li key={key}>{key}</li>
+                    )
+                  ) : (
+                    <li>SELECT YOUR POKEMON</li>
+                  )}
                 </ul>
               </div>
               <div className="effect-container">
-                <h2>half effective agaisnt</h2>
+                <h2>Half Damage From</h2>
                 <ul className="effective-list-container">
-                  <li>FIRE</li>
+                  {typeof pickedPokemon.dmg_relation !== "undefined" ? (
+                    pickedPokemon.dmg_relation[0].half_damage_from.map(
+                      (key) => <li key={key}>{key}</li>
+                    )
+                  ) : (
+                    <li>SELECT YOUR POKEMON</li>
+                  )}
                 </ul>
               </div>
               <div className="effect-container">
-                <h2>No effect agaisnt</h2>
+                <h2>Half Damage to</h2>
                 <ul className="effective-list-container">
-                  <li>FIRE</li>
+                  {typeof pickedPokemon.dmg_relation !== "undefined" ? (
+                    pickedPokemon.dmg_relation[0].half_damage_to.map(
+                      (key) => <li key={key}>{key}</li>
+                    )
+                  ) : (
+                    <li>SELECT YOUR POKEMON</li>
+                  )}
                 </ul>
               </div>
             </div>

@@ -5,6 +5,18 @@
   margin: 0.5rem 0 0.5rem 0.5rem;
   height: 92.5vh;
   width: 30vw;
+  overflow-x:hidden;
+  overflow-y: scroll;
+}
+.pokemon-stat-container::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.pokemon-stat-container::-webkit-scrollbar-track {
+  background: #d0d1d3;
+}
+.pokemon-stat-container::-webkit-scrollbar-thumb {
+  background: #112432;
+  border-radius: 15px;;
 }
 
 .effect-container{
@@ -13,11 +25,14 @@
 }
 .effective-list-container {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 0;
   list-style: none;
-  font-size: 1rem;
+  font-size: 0.75rem;
   >li{
       padding: 0.5rem;
       border: solid black;
+      margin:0 0.5rem 0.5rem 0;
   }
 }

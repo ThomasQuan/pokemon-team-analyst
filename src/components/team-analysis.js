@@ -22,6 +22,62 @@ const TeamAnalysis = (props) => {
       axios
         .get(`https://pokeapi.co/api/v2/pokemon/${selectedPokemon[i].id}`)
         .then((res) => {
+          let temp_dmg = [ {
+            double_damage_from: [],
+            double_damage_to: [],
+            half_damage_from: [],
+            half_damage_to: [],
+            no_damage_from: [],
+            no_damage_to: [],
+          },];
+          res.data.types.map(key=>{
+            axios.get(key.type.url).then(res=>{
+              let dmg_relation = res.data.damage_relations;
+                //double damage to
+                dmg_relation.double_damage_from.map((key) => {
+                  temp_dmg[0].double_damage_from.push(key.name);
+                });
+                //double damage to
+                dmg_relation.double_damage_to.map((key) => {
+                  temp_dmg[0].double_damage_to.push(key.name);
+                });
+                //half damage from
+                dmg_relation.half_damage_from.map((key) => {
+                  temp_dmg[0].half_damage_from.push(key.name);
+                });
+                //half damage to
+                dmg_relation.half_damage_to.map((key) => {
+                  temp_dmg[0].half_damage_to.push(key.name);
+                });
+                //no damage from
+                dmg_relation.no_damage_from.map((key) => {
+                  temp_dmg[0].no_damage_from.push(key.name);
+                });
+                //no damage to
+                dmg_relation.no_damage_to.map((key) => {
+                  temp_dmg[0].no_damage_to.push(key.name);
+                });
+            })
+          });
+          temp_dmg[0].double_damage_from = [
+            ...new Set(temp_dmg[0].double_damage_from),
+          ];
+          temp_dmg[0].double_damage_to = [
+            ...new Set(temp_dmg[0].double_damage_to),
+          ];
+          temp_dmg[0].half_damage_from = [
+            ...new Set(temp_dmg[0].half_damage_from),
+          ];
+          temp_dmg[0].half_damage_to = [
+            ...new Set(temp_dmg[0].half_damage_to),
+          ];
+          temp_dmg[0].no_damage_from = [
+            ...new Set(temp_dmg[0].no_damage_from),
+          ];
+          temp_dmg[0].no_damage_to = [
+            ...new Set(temp_dmg[0].no_damage_to),
+          ];
+          
           setPokemonData((pokemonData) =>
             pokemonData.concat({
               id: res.data.id,
@@ -33,6 +89,8 @@ const TeamAnalysis = (props) => {
               move_id: res.data.moves.map((key) =>
                 key.move.url.substr(31).replace(/\//g, "")
               ),
+              dmg_relation : temp_dmg
+
             })
           );
         });
