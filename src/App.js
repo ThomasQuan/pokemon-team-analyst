@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.scss";
 import PokemonList from "./components/pokemon-list";
-import TeamAnalysis from "./components/team-analysis";
-import NotFound from "./components/not-found";
+import TeamAnalysis from "./components/selected-pokemon/team-analysis";
+import NotFound from "./components/errors/not-found";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {

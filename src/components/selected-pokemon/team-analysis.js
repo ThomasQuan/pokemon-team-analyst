@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Next from "../assets/images/next.png";
-import TypeDetector from "./types-detector";
+import Next from "../../assets/images/next.png";
+import TypeDetector from "../utils/types-detector";
 import axios from "axios";
 import PokemonStat from "./pokemon-stat";
 import TeamResult from "./team-result";
-import MoveList from "./move-list-modal";
+import MoveList from "../utils/move-list-modal";
 
 const TeamAnalysis = (props) => {
   const [selectedPokemon] = useState(props.location.pokemons.selected);

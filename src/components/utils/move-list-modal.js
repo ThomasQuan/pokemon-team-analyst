@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
-import Next from "../assets/images/next.png";
+import Next from "../../assets/images/next.png";
 
-import DialogBorder from "../assets/images/dialog_box.png";
+import DialogBorder from "../../assets/images/dialog_box.png";
 const MoveList = (props) => {
   const customStyles = {
     content: {

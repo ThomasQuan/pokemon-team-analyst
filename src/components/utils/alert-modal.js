@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
-import PikachuDenial from "../assets/gif/pikachu-denial.gif";
+import PikachuDenial from "../../assets/gif/pikachu-denial.gif";
 const Alert = (props) => {
   const customStyles = {
     content: {
