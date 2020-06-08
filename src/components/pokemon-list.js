@@ -38,6 +38,11 @@ class PokemonList extends Component {
       if (key.name !== pokemonName) {
         newArray.push(key);
       }
+      else{
+        let tempArr = this.state.pokemons;
+        tempArr.splice(key.id-1, 0, key);
+        this.setState({pokemons : tempArr})
+      }
     });
     this.setState({
       selected_team: newArray,
@@ -138,9 +143,7 @@ class PokemonList extends Component {
           <div className="search-container">
             <input />
           </div>
-          <Button id="load-more" onClick={() => this.loadNextBatch()}>
-            LOAD MORE
-          </Button>
+
           <div className="container-list">
             <h2 className="title">POKEMONS</h2>
             <div className="pokemon-list">
@@ -165,6 +168,11 @@ class PokemonList extends Component {
                 </div>
               ))}
             </div>
+          </div>
+          <div className='load-more-container'>
+            <Button id="load-more" onClick={() => this.loadNextBatch()}>
+              LOAD MORE
+            </Button>
           </div>
         </div>
       </React.Fragment>

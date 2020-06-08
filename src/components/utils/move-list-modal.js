@@ -44,9 +44,9 @@ const MoveList = (props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <h2 className='modal-title'>MOVE LIST</h2>
+        <h2 className="modal-title">MOVE LIST</h2>
         {moveList.map((key, index) => (
-          <div className='move-container' key={index}>
+          <div className="move-container" key={index}>
             <ul>
               <li
                 onClick={() => {

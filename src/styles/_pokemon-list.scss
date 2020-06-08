@@ -3,7 +3,7 @@
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-image: url('../assets/gif/rotom-dex.gif');
+  background-image: url("../assets/gif/rotom-dex.gif");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -11,7 +11,7 @@
 .pokemon-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   text-align: center;
   height: 100%;
 }
@@ -63,12 +63,7 @@
   text-align: center;
   font-size: 1.2rem;
 }
-#load-more {
 
-  margin-top: 0.5rem;
-  border-radius: 7px;
-  background-color: #d4cfcf;
-}
 .pokemon-img {
   display: flex;
   margin: auto;
@@ -100,9 +95,10 @@
     background-size: 1.5rem;
     background-position-y: center;
     background-position: 1.5rem;
-    background-color: #7a9acf;
+    background-color: rgba(193, 81, 238, 0.486);
     border-radius: 3px;
-    border-color: black;;
+    border-color: black;
+    font-family: "Press Start 2P", cursive;
   }
 }
 
@@ -117,7 +113,7 @@
   border-image: url("../assets/images/dialog_box.png") 30 round;
   width: 70vw;
 
-  height: 65vh;
+  height: 60vh;
   overflow-y: scroll;
 }
 .container-list::-webkit-scrollbar {
@@ -131,4 +127,22 @@
 .container-list::-webkit-scrollbar-thumb {
   background: #112432;
   border-radius: 15px;
+}
+
+.load-more-container {
+  margin-top: 0.5rem;
+  width: 100vw;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+#load-more {
+  letter-spacing: 0.5rem;
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  background-color:  #dddcd6 ;
+  border: solid #8b1919;
+  color: #8b1919;
 }
