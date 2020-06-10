@@ -11,7 +11,7 @@ const DamageClassDetector=(damage_type)=>{
     else if(damage_type === 'special'){
         return Special
     }else{
-        return
+        return Special
     }
 }
 

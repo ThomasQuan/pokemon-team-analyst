@@ -25,10 +25,10 @@
     width: 60%;
     height: 100vh;
     margin-left: 1rem;
-    >.pokemon-body-portion{
+    > .pokemon-body-portion {
       display: flex;
       justify-content: flex-start;
-      >h3{
+      > h3 {
         margin-left: 2rem;
       }
     }
@@ -38,7 +38,6 @@
       flex-wrap: wrap;
     }
     > div > .move-detail-container {
-
       display: flex;
       width: 48%;
       height: max-content;
@@ -111,3 +110,4 @@
     background-color: #2124b8;
   }
 }
+

@@ -3,14 +3,14 @@ import { HorizontalBar } from "react-chartjs-2";
 import DamageRelation from "./pokemon-damage-relation";
 import DamageClassDetector from "../utils/damage_class_detector";
 import axios from "axios";
-
+import Next from "../../assets/images/next.png";
 const PokemonStat = (props) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [pickedPokemon, setPickedPokemon] = useState({});
-  const [move1, setMove1] = useState();
-  const [move2, setMove2] = useState();
-  const [move3, setMove3] = useState();
-  const [move4, setMove4] = useState();
+  const [move1, setMove1] = useState({});
+  const [move2, setMove2] = useState({});
+  const [move3, setMove3] = useState({});
+  const [move4, setMove4] = useState({});
   const [barChart, setBarChart] = useState({
     property: {
       type: "horizontalBar",
@@ -50,6 +50,7 @@ const PokemonStat = (props) => {
 
   useEffect(() => {
     const pp = props.picked_pokemon.picked_pokemon;
+
     if (typeof pp !== "undefined") {
       setPokemonData({ pokemonData: props.pokemonData });
       setPickedPokemon({
@@ -59,11 +60,13 @@ const PokemonStat = (props) => {
         dmg_relation: pp.dmg_relation,
         weight: pp.weight,
         height: pp.height,
-        abilities: [],
+        abilities: pp.abilities,
       });
 
-     
-
+      setMove1({});
+      setMove2({});
+      setMove3({});
+      setMove4({});
       if (typeof pp.selected_move[0] !== "undefined") {
         axios.get(pp.selected_move[0].move.url).then((res) => {
           let data = res.data;
@@ -167,11 +170,13 @@ const PokemonStat = (props) => {
   return (
     <React.Fragment>
       <div className="pokemon-stat-container">
-        {pickedPokemon.name === "" ? (
-          <p className="modal-title">SELECT YOUR POKEMON</p>
-        ) : (
-          <p className="modal-title">{pickedPokemon.name}</p>
-        )}
+        {
+          (pickedPokemon.name === "" ? (
+            <p className="modal-title">SELECT YOUR POKEMON</p>
+          ) : (
+            <p className="modal-title">{pickedPokemon.name}</p>
+          ))
+        }
 
         <div className="information-container">
           <div className="chart-container">
@@ -188,13 +193,16 @@ const PokemonStat = (props) => {
               <h3>Weight : {pickedPokemon.weight} kg</h3>
             </div>
             <h3>Abilities</h3>
-            <ul>
-              <li></li>
-              <li>
-                This Pokémon's Speed is doubled during strong sunlight. This
-                bonus does not count as a stat modifier.
-              </li>
-            </ul>
+            {typeof pickedPokemon.abilities !== "undefined" ? (
+              <ul>
+                {pickedPokemon.abilities.map((key, index) => (
+                  <li key={index}>{key.desc[0].effect}</li>
+                ))}
+              </ul>
+            ) : (
+              <ul></ul>
+            )}
+
             <h3>Selected Move attribute</h3>
             <div>
               {typeof move1 !== "undefined" ? (

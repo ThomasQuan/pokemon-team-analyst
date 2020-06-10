@@ -4,8 +4,10 @@ import TypeDetector from "../utils/types-detector";
 import axios from "axios";
 import PokemonStat from "./pokemon-stat";
 import MoveList from "../utils/move-list-modal";
+import { useHistory } from "react-router-dom";
 
 const TeamAnalysis = (props) => {
+
   const [selectedPokemon] = useState(props.location.pokemons.selected);
   const [pokemonData, setPokemonData] = useState([]);
   const [modal, setModal] = useState({
@@ -73,6 +75,18 @@ const TeamAnalysis = (props) => {
           temp_dmg[0].no_damage_from = [...new Set(temp_dmg[0].no_damage_from)];
           temp_dmg[0].no_damage_to = [...new Set(temp_dmg[0].no_damage_to)];
 
+          let temp_abilities = [];
+          for (let i = 0; i < res.data.abilities.length; i++) {
+            if (typeof res.data.abilities[i].ability !== "undefined") {
+              axios.get(res.data.abilities[i].ability.url).then((res) => {
+                const name = res.data.name;
+                const en_desc = res.data.effect_entries.filter(
+                  (key) => key.language.name === "en"
+                );
+                temp_abilities.push({ name: name, desc: en_desc });
+              });
+            }
+          }
           setPokemonData((pokemonData) =>
             pokemonData.concat({
               id: res.data.id,
@@ -84,9 +98,9 @@ const TeamAnalysis = (props) => {
               move_id: res.data.moves.map((key) =>
                 key.move.url.substr(31).replace(/\//g, "")
               ),
-              height : res.data.height,
-              weight : res.data.weight,
-              abilities : res.data.abilities,
+              height: res.data.height,
+              weight: res.data.weight,
+              abilities: temp_abilities,
               dmg_relation: temp_dmg,
             })
           );
@@ -96,8 +110,6 @@ const TeamAnalysis = (props) => {
 
   const handleOpen = (pokemon, index) => {
     if (pokemon.selected_move[index] !== undefined) {
-      // const newArr = pokemon.selected_move.filter((key) => key.index !== index);
-      // console.log(newArr)
       console.log("Future me, good luck creating a better deleting function");
     } else {
       setModal({
@@ -152,7 +164,6 @@ const TeamAnalysis = (props) => {
             <div
               key={key.id}
               onClick={() => {
-                console.log(key)
                 pick_pokemon(key);
               }}
               className="pokemon-detail"
