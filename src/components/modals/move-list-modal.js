@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import axios from "axios";
 import Next from "../../assets/images/next.png";
 
 import DialogBorder from "../../assets/images/dialog_box.png";
@@ -8,13 +7,13 @@ const MoveList = (props) => {
   const customStyles = {
     content: {
       top: "50%",
-      left: "50%",
+      left: "60%",
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       width: "50vw",
-      height: "80vh",
+      height: "65vh",
       padding: 0,
       border: "10px solid transparent",
       borderImage: `url(${DialogBorder}) 30 round`,

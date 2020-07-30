@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { HorizontalBar } from "react-chartjs-2";
 import DamageRelation from "./pokemon-damage-relation";
-import DamageClassDetector from "../utils/damage_class_detector";
 import axios from "axios";
-import Next from "../../assets/images/next.png";
+import MoveAttribute from "./pokemon-move-attribute";
 const PokemonStat = (props) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [pickedPokemon, setPickedPokemon] = useState({});
@@ -170,13 +169,11 @@ const PokemonStat = (props) => {
   return (
     <React.Fragment>
       <div className="pokemon-stat-container">
-        {
-          (pickedPokemon.name === "" ? (
-            <p className="modal-title">SELECT YOUR POKEMON</p>
-          ) : (
-            <p className="modal-title">{pickedPokemon.name}</p>
-          ))
-        }
+        {pickedPokemon.name === "" ? (
+          <p className="modal-title">SELECT YOUR POKEMON</p>
+        ) : (
+          <p className="modal-title">{pickedPokemon.name}</p>
+        )}
 
         <div className="information-container">
           <div className="chart-container">
@@ -205,98 +202,7 @@ const PokemonStat = (props) => {
 
             <h3>Selected Move attribute</h3>
             <div>
-              {typeof move1 !== "undefined" ? (
-                <div className="move-detail-container">
-                  <div className="move-detail-container-title">
-                    <h3>{move1.name}</h3>
-                    <img
-                      alt="damage-class"
-                      src={DamageClassDetector(move1.damage_class)}
-                    ></img>
-                  </div>
-                  <ul>
-                    <li>Accuracy : {move1.accuracy}</li>
-                    <li>Damage Class : {move1.damage_class}</li>
-                    <li>Effeect Chance : {move1.effect_chance}</li>
-                    <li>Power : {move1.power}</li>
-                    <li>PP : {move1.pp}</li>
-                    <li>Priority : {move1.priority}</li>
-                    <li>Target : {move1.target}</li>
-                    <li>Type : {move1.type}</li>
-                  </ul>
-                </div>
-              ) : (
-                <div></div>
-              )}
-              {typeof move2 !== "undefined" ? (
-                <div className="move-detail-container">
-                  <div className="move-detail-container-title">
-                    <h3>{move2.name}</h3>
-                    <img
-                      alt="damage-class"
-                      src={DamageClassDetector(move2.damage_class)}
-                    ></img>
-                  </div>
-                  <ul>
-                    <li>Accuracy : {move2.accuracy}</li>
-                    <li>Damage Class : {move2.damage_class}</li>
-                    <li>Effeect Chance : {move2.effect_chance}</li>
-                    <li>Power : {move2.power}</li>
-                    <li>PP : {move2.pp}</li>
-                    <li>Priority : {move2.priority}</li>
-                    <li>Target : {move2.target}</li>
-                    <li>Type : {move2.type}</li>
-                  </ul>
-                </div>
-              ) : (
-                <div></div>
-              )}
-              {typeof move3 !== "undefined" ? (
-                <div className="move-detail-container">
-                  <div className="move-detail-container-title">
-                    <h3>{move3.name}</h3>
-                    <img
-                      alt="damage-class"
-                      src={DamageClassDetector(move3.damage_class)}
-                    ></img>
-                  </div>
-                  <ul>
-                    <li>Accuracy : {move3.accuracy}</li>
-                    <li>Damage Class : {move3.damage_class}</li>
-                    <li>Effeect Chance : {move3.effect_chance}</li>
-                    <li>Power : {move3.power}</li>
-                    <li>PP : {move3.pp}</li>
-                    <li>Priority : {move3.priority}</li>
-                    <li>Target : {move3.target}</li>
-                    <li>Type : {move3.type}</li>
-                  </ul>
-                </div>
-              ) : (
-                <div></div>
-              )}
-              {typeof move4 !== "undefined" ? (
-                <div className="move-detail-container">
-                  <div className="move-detail-container-title">
-                    <h3>{move4.name}</h3>
-                    <img
-                      alt="damage-class"
-                      src={DamageClassDetector(move4.damage_class)}
-                    ></img>
-                  </div>
-                  <ul>
-                    <li>Accuracy : {move4.accuracy}</li>
-                    <li>Damage Class : {move4.damage_class}</li>
-                    <li>Effeect Chance : {move4.effect_chance}</li>
-                    <li>Power : {move4.power}</li>
-                    <li>PP : {move4.pp}</li>
-                    <li>Priority : {move4.priority}</li>
-                    <li>Target : {move4.target}</li>
-                    <li>Type : {move4.type}</li>
-                  </ul>
-                </div>
-              ) : (
-                <div></div>
-              )}
+              <MoveAttribute moveList={[move1, move2, move3, move4]} />
             </div>
           </div>
         </div>

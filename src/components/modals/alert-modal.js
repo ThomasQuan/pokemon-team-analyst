@@ -10,8 +10,8 @@ const Alert = (props) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      width: "30vw",
-      height: "20vh",
+      width: "55vw",
+      height: "40vh",
       padding: 0,
       overflow: "hidden",
       display: "flex",
@@ -23,9 +23,7 @@ const Alert = (props) => {
   };
   Modal.setAppElement("#root");
 
-  //this need to be in the parent compoentn
-  // const openModal = () => {
-  //   setModal(true);
+
   const closeModal = () => {
     props.handleClose();
   };
@@ -37,7 +35,6 @@ const Alert = (props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <h2>Maxium Pokemon allow exceeded</h2>
         <img className='alert-gif' src={PikachuDenial} alt="pokemon pikachu gif denial"></img>
       </Modal>
     </React.Fragment>

@@ -4,7 +4,7 @@
   border-image: url("../assets/images/dialog_box.png") 30 round;
   margin: 0.5rem 0 0.5rem 0.5rem;
   height: 96vh;
-  width: 65vw;
+  width: 68vw;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -21,6 +21,11 @@
 
 .information-container {
   display: flex;
+  > .chart-container {
+    width: 40%;
+    height: max-content;
+  }
+
   > .pokemon-info {
     width: 60%;
     height: 100vh;
@@ -61,15 +66,12 @@
       }
     }
   }
-  > .chart-container {
-    width: 40%;
-    height: 100vh;
-  }
+  
 }
 
 .effect-container {
   margin-left: 0.5rem;
-  font-size: 0.75rem;
+  
 }
 .effective-list-container {
   display: flex;
@@ -111,3 +113,21 @@
   }
 }
 
+@media only screen and (max-width: 1200px) {
+  .pokemon-stat-container{
+    margin: auto;
+    overflow-y: scroll;
+    width: 95vw;
+  }
+  .information-container{
+    flex-direction: column;
+    >.chart-container{
+      width: 100%;
+    }
+    >.pokemon-info{
+      width: 100%;
+      
+    }
+    
+  }
+}

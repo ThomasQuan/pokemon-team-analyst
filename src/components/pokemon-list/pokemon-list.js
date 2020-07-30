@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
-import Alert from "./utils/alert-modal";
+import Alert from "../modals/alert-modal";
 import { Link } from "react-router-dom";
-import MasterBall from "../assets/images/master_ball.png";
+import MasterBall from "../../assets/images/master_ball.png";
 class PokemonList extends Component {
   state = {
-    manager: "Thanh Quan",
     selected_team: [],
     pokemons: [],
     next: "",
@@ -37,11 +35,10 @@ class PokemonList extends Component {
     this.state.selected_team.map((key) => {
       if (key.name !== pokemonName) {
         newArray.push(key);
-      }
-      else{
+      } else {
         let tempArr = this.state.pokemons;
-        tempArr.splice(key.id-1, 0, key);
-        this.setState({pokemons : tempArr})
+        tempArr.splice(key.id - 1, 0, key);
+        this.setState({ pokemons: tempArr });
       }
     });
     this.setState({
@@ -114,7 +111,7 @@ class PokemonList extends Component {
                     pokemons: { selected: this.state.selected_team },
                   }}
                 >
-                  <Button>Inspect</Button>
+                  INSPECT TEAM
                 </Link>
               )}
             </div>
@@ -132,11 +129,11 @@ class PokemonList extends Component {
                     src={MasterBall}
                     alt="pokemon"
                   ></img>
-                  <h3>SELECT YOUR POKEMON</h3>
+                  <h3>Choose your pokemon</h3>
                 </div>
               </div>
               <Link id="btn-inspect" to="/">
-                <Button disabled>Inspect</Button>
+                INSPECT TEAM
               </Link>
             </div>
           )}
@@ -169,10 +166,10 @@ class PokemonList extends Component {
               ))}
             </div>
           </div>
-          <div className='load-more-container'>
-            <Button id="load-more" onClick={() => this.loadNextBatch()}>
+          <div className="load-more-container">
+            <button id="load-more" onClick={() => this.loadNextBatch()}>
               LOAD MORE
-            </Button>
+            </button>
           </div>
         </div>
       </React.Fragment>

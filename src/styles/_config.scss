@@ -1,4 +1,24 @@
-
+$p-font-sizes: (
+  null  : 10px,
+  480px : 12px,
+  640px : 13px,
+  1024px: 14px
+);
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      font-size: $fs-font-size;
+    }
+    @else {
+      @media screen and (min-width: $fs-breakpoint) {
+        font-size: $fs-font-size;
+      }
+    }
+  }
+}
+p {
+  @include font-size($p-font-sizes);
+}
 body::-webkit-scrollbar {
   width: 0.5rem;
 }
@@ -49,3 +69,4 @@ body {
   justify-content: center;
   font-size: 2rem;
 }
+

@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.scss";
-import PokemonList from "./components/pokemon-list";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import PokemonList from "./components/pokemon-list/pokemon-list";
 import TeamAnalysis from "./components/selected-pokemon/team-analysis";
 import NotFound from "./components/errors/not-found";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
