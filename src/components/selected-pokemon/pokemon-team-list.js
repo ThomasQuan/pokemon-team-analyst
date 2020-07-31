@@ -32,7 +32,6 @@ const PokemonTeamList = (props) => {
         return key;
       }
     });
-    console.log(deleteAllMove)
     props.setPokemonData(deleteAllMove);
 
   }
