@@ -21,13 +21,30 @@
   > div {
     display: flex;
     width: max-content;
+    position: relative;
+    .delete-move-btn {
+      width: max-content;
+      height: max-content;
+      border: 7px solid transparent;
+      border-image: url("../assets/images/dialog_box.png") 30 round;
+      border-image-outset: 7px;
+      font-family: "Orbitron", sans-serif;
+      border-top: hidden;
+      border-right: hidden;
+      background-color: #8f0606;
+      color: white;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.5rem 0.24rem 0.24rem 0.24rem;
+    }
   }
 }
 
 .pokemon-title {
   display: flex;
   flex-direction: column;
-  width: 10vw;
+  width: 35%;
   > div {
     display: flex;
     > ul {
@@ -52,24 +69,26 @@
   > img {
     border-width: 4px;
     width: 6vw;
-    height: 60%;
-    margin: auto;
+    height: 40%;
+    margin: auto auto 0 auto;
     animation-name: bounce;
     animation-duration: 0.75s;
     animation-iteration-count: infinite;
   }
   > h4 {
-    margin: auto;
+    margin: 0 auto auto auto;
   }
 }
+
 .pokemon-move-list {
   display: flex;
+  margin-top: 2rem;
   justify-content: center;
   align-content: center;
   text-align: center;
   flex-wrap: wrap;
   flex: 1;
-  font-family: "Press Start 2P", cursive;
+  font-family: "Orbitron", sans-serif;
   > div {
     cursor: pointer;
     text-align: center;
@@ -77,9 +96,9 @@
     width: 40%;
     > img {
       visibility: hidden;
-      width: 13px;
-      height: 13px;
-      margin-right: 1rem;
+      width: 6px;
+      height: 6px;
+      margin-right: 0.25rem;
       margin-top: auto;
       margin-bottom: auto;
     }
@@ -103,33 +122,33 @@
     height: max-content;
     flex-wrap: wrap;
   }
-  .pokemon-detail{
+  .pokemon-detail {
     width: 30vw;
   }
   .pokemon-title {
     width: 10vw;
-    >img{
+    > img {
       width: 10vw;
     }
   }
 }
 @media only screen and (max-width: 800px) {
-  .pokemon-detail{
+  .pokemon-detail {
     width: 40vw;
   }
 }
 @media only screen and (max-width: 600px) {
   .selected-pokemon-detail {
-    width: 100vw;
+    width: 95vw;
   }
-  .pokemon-detail{
-    width: 100vw;
+  .pokemon-detail {
+    width: 95vw;
     height: max-content;
   }
   .pokemon-title {
     width: 30vw;
     height: max-content;
-    >img{
+    > img {
       width: 15vw;
     }
   }

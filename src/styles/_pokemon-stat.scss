@@ -3,7 +3,7 @@
   background-color: #e1dad2;
   border-image: url("../assets/images/dialog_box.png") 30 round;
   margin: 0.5rem 0 0.5rem 0.5rem;
-  height: 96vh;
+  height: 95vh;
   width: 68vw;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -23,12 +23,12 @@
   display: flex;
   > .chart-container {
     width: 40%;
-    height: max-content;
+    height: max-content
   }
 
   > .pokemon-info {
     width: 60%;
-    height: 100vh;
+    height: max-content;
     margin-left: 1rem;
     > .pokemon-body-portion {
       display: flex;

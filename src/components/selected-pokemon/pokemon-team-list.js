@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import TypeDetector from "../utils/types-detector";
 import MoveList from "../modals/move-list-modal";
 import Next from "../../assets/images/next.png";
-import Slider from "react-slick";
 
 const PokemonTeamList = (props) => {
   const moveSize = [0, 1, 2, 3];
@@ -14,9 +13,7 @@ const PokemonTeamList = (props) => {
     move_id: [],
   });
   const handleOpen = (pokemon, index) => {
-    if (pokemon.selected_move[index] !== undefined) {
-      console.log("Future me, good luck creating a better deleting function");
-    } else {
+    if (pokemon.selected_move[index] === undefined) {
       setModal({
         condition: true,
         move_list: pokemon.moves,
@@ -27,6 +24,18 @@ const PokemonTeamList = (props) => {
     }
   };
 
+  const deletePokemonMove=(pokemonName)=>{
+    const deleteAllMove = props.pokemonData.map((key) => {
+      if (key.name === pokemonName) {
+        return { ...key, selected_move: [] };
+      } else {
+        return key;
+      }
+    });
+    console.log(deleteAllMove)
+    props.setPokemonData(deleteAllMove);
+
+  }
   const handleClose = () => {
     setModal({
       condition: false,
@@ -49,22 +58,12 @@ const PokemonTeamList = (props) => {
   const picked_move = (move, pokemon_name, index) => {
     const tempArr = props.pokemonData.map((key) => {
       if (key.name === pokemon_name) {
-        if (key.selected_move.length !== 4) {
-          key.selected_move.push({ index, move });
-        } else {
-          handleClose();
-        }
+        key.selected_move.push({ index, move });
       }
+      handleClose();
       return key;
     });
     props.setPokemonData(tempArr);
-  };
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
   };
 
   return (
@@ -79,6 +78,7 @@ const PokemonTeamList = (props) => {
             className="pokemon-detail"
           >
             <div>
+              <button className="delete-move-btn" onClick={()=>{deletePokemonMove(key.name)}}>Remove all moves</button>
               <div className="pokemon-title">
                 <div>
                   {key.types.map((el) => (
@@ -96,6 +96,7 @@ const PokemonTeamList = (props) => {
                 ></img>
                 <h4>{key.name}</h4>
               </div>
+
               <div className="pokemon-move-list">
                 {moveSize.map((i) => (
                   <div
@@ -109,6 +110,7 @@ const PokemonTeamList = (props) => {
                   </div>
                 ))}
               </div>
+
               <MoveList
                 isOpen={modal.condition}
                 moveList={modal.move_list}
