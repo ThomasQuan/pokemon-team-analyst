@@ -4,11 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 const Damage_Relation = (props) => {
-  const [tabValue, setTabValue] = React.useState(0);
 
-  const handleChangeTab = (event, newValue) => {
-    setTabValue(newValue);
-  };
+
 
   return (
     <React.Fragment>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TypeDetector from "../utils/types-detector";
 import MoveList from "../modals/move-list-modal";
 import Next from "../../assets/images/next.png";
