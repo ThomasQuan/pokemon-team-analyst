@@ -8,7 +8,7 @@
 }
 
 .selected-pokemon-detail {
-  width: 30vw;
+  width: 25vw;
   height: 100vh;
 }
 .pokemon-detail {
@@ -20,7 +20,7 @@
   height: max-content;
   > div {
     display: flex;
-    width: max-content;
+    
     position: relative;
     .delete-move-btn {
       width: max-content;
@@ -98,7 +98,7 @@
       visibility: hidden;
       width: 6px;
       height: 6px;
-      margin-right: 0.25rem;
+      margin-right: 1rem;
       margin-top: auto;
       margin-bottom: auto;
     }
