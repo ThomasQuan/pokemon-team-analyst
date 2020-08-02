@@ -78,6 +78,12 @@ class PokemonList extends Component {
     return (
       <React.Fragment>
         <div className="pokemon-list-container">
+          <div className="app-title-container">
+            <h1>
+               Rotom Analyst
+            </h1>
+          </div>
+
           {this.state.selected_team.length !== 0 ? (
             <div className="selected-container">
               <h2 className="title">Selected Team</h2>
@@ -132,7 +138,7 @@ class PokemonList extends Component {
                   <h3>Choose your pokemon</h3>
                 </div>
               </div>
-              <Link id="btn-inspect" to="/">
+              <Link id="btn-inspect" to="/main">
                 INSPECT TEAM
               </Link>
             </div>

@@ -14,7 +14,7 @@
 .pokemon-detail {
   display: flex;
   border: 10px solid transparent;
-  background-color: #e1dad2;
+  background-color: $background-color;
   border-image: url("../assets/images/dialog_box.png") 30 round;
   margin: 0.5rem 0 0.5rem 0.5rem;
   height: max-content;
@@ -30,7 +30,7 @@
       font-family: "Orbitron", sans-serif;
       border-top: hidden;
       border-right: hidden;
-      background-color: #8f0606;
+      background-color: $primary-color;
       color: white;
       position: absolute;
       top: 0;
@@ -68,7 +68,7 @@
   > img {
     border-width: 4px;
     width: 6vw;
-    height: 40%;
+    height: 60%;
     margin: auto auto 0 auto;
     animation-name: bounce;
     animation-duration: 0.75s;

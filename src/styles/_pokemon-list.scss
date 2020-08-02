@@ -1,14 +1,33 @@
 .pokemon-list-container {
   width: 100%;
   height: 100vh;
+  position: absolute;
   margin: 0;
   padding: 0;
   background-image: url("../assets/gif/rotom-dex.gif");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  overflow: hidden;
+  > .app-title-container {
+    display: flex;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+    padding: 0 2rem 0 2rem;
+    margin: 0 auto 0 auto;
+
+    > h1 {
+      letter-spacing: 0.1rem;
+      margin: 1rem auto 0.5rem auto;
+      padding: 0.5rem;
+      text-align: center;
+      font-family: $pixel-font;
+      font-size: 1.5rem;
+      color: $primary-color;
+    }
+  }
 }
+
 .pokemon-list {
   display: flex;
   flex-wrap: wrap;
@@ -23,7 +42,7 @@
   align-items: center;
   justify-content: center;
   border: 10px solid transparent;
-  background-color: #e1dad2;
+  background-color: $background-color;
   border-image: url("../assets/images/dialog_box.png") 30 round;
   height: max-content;
   width: 70vw;
@@ -40,16 +59,13 @@
 }
 
 #btn-inspect {
+  letter-spacing: 0.5rem;
   text-align: center;
-  text-decoration: none;
-  color: #112432;
-  width: max-content;
-  height: max-content;
-  background-color: none;
-  font-size: 1rem;
-  padding:0.25rem 0.5rem 0.25rem 0.5rem;
+  font-family: $pixel-font;
+  background-color: $background-color;
+  border: solid $primary-color;
+  color: $primary-color;
   margin-bottom: 0.5rem;
-  border: solid #8b1919;
 }
 
 .pokemon {
@@ -57,10 +73,10 @@
   padding: 0.5rem;
   width: max-content;
   height: max-content;
-  background-color: rgb(247, 245, 245);
+  background-color: $background-color;
   display: flex;
   flex-direction: column;
-  border: solid #4e4c4c;
+  border: solid $primary-color;
   border-radius: 5px;
   text-align: center;
 }
@@ -70,7 +86,6 @@
   margin: auto;
   max-width: 4rem;
   height: auto;
-
 }
 .pokemon-img:hover {
   animation-name: bounce;
@@ -97,10 +112,10 @@
     background-size: 1.5rem;
     background-position-y: center;
     background-position: 1.5rem;
-    background-color: rgba(32, 50, 109, 0.486);
+    background-color: $background-color;
     border-radius: 3px;
-    border-color: black;
-    font-family: "Press Start 2P", cursive;
+    border-color: $primary-color;
+    font-family: $pixel-font;
   }
 }
 
@@ -110,11 +125,11 @@
   flex-direction: column;
   text-align: center;
   border: 10px solid transparent;
-  background-color: #e1dad2;
+  background-color: $background-color;
   border-image: url("../assets/images/dialog_box.png") 30 round;
   width: 70vw;
 
-  height: 55vh;
+  height: 50vh;
   overflow-y: scroll;
 }
 .container-list::-webkit-scrollbar {
@@ -131,26 +146,42 @@
 }
 
 .load-more-container {
-  margin-top: 2.5rem;
-  width: 100vw;
+  margin: 2rem auto 0 auto;
+  width: max-content;
   height: max-content;
   display: flex;
   justify-content: center;
-  
-
 }
 #load-more {
   letter-spacing: 0.5rem;
   text-align: center;
-  font-family: "Press Start 2P", cursive;
-  background-color:  #dddcd6 ;
-  border: solid #8b1919;
-  color: #8b1919;
+  font-family: $pixel-font;
+  background-color: $background-color;
+  border: solid $primary-color;
+  color: $primary-color;
 }
 
 @media only screen and (max-width: 700px) {
-  .pokemon-list-container{
+  .pokemon-list-container {
     height: max-content;
-    overflow-y: hidden;;
+    overflow-y: hidden;
+    .app-title-container {
+      > h1 {
+        letter-spacing: 0;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .pokemon-list {
+    justify-content: flex-start;
+  }
+  .pokemon {
+    font-size: 0.5rem;
+    margin: 0 0.1rem 0 0.1rem;
+    padding: 0;
+  }
+  .pokemon-img {
+    max-width: 2rem;
   }
 }
