@@ -160,11 +160,13 @@
   border: solid $primary-color;
   color: $primary-color;
 }
-
-@media only screen and (max-width: 700px) {
+@media only screen and (max-height: 750px) {
   .pokemon-list-container {
     height: max-content;
-    overflow-y: hidden;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .pokemon-list-container {
     .app-title-container {
       > h1 {
         letter-spacing: 0;

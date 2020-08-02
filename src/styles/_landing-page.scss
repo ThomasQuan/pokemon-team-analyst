@@ -14,38 +14,30 @@
     display: flex;
     justify-content: space-between;
     > .dialog-container {
-      position: relative;
       margin-left: 2rem;
       display: flex;
       align-items: center;
       font-family: $pixel-font;
     }
     > .options-container {
-      display: flex;
       border: 10px solid transparent;
       border-image: url("../assets/images/dialog_box.png") 35 round;
-      width: 10vw;
-      flex-direction: column;
-      justify-content: space-around;
-
       > div {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: auto;
-        margin-right: auto;
+
         > i {
           visibility: hidden;
         }
         > .option-link {
-
           padding: 0.2rem 1rem 0.2rem 1rem;
+          color: black;
           text-decoration: none;
           > p {
             font-family: $pixel-font;
           }
         }
-        
       }
       > div:hover {
         > i {
@@ -55,5 +47,17 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .start-container {
+    flex-direction: column;
+  }
+  .options-container {
+    display: flex;
+    justify-content: center;
+    width: 30vw;
+    margin: 0 auto 0 auto;
   }
 }
